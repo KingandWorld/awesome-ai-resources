@@ -1,8 +1,8 @@
 # 🤖 Claude Code + DeepSeek API 部署指南
 
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-blue)]()
-[![Node](https://img.shields.io/badge/node-18%2B-brightgreen)]()
-[![License](https://img.shields.io/badge/license-MIT-green)]()
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-blue)](https://github.com/KingandWorld/awesome-ai-resources)
+[![Node](https://img.shields.io/badge/node-18%2B-brightgreen)](https://nodejs.org)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
 
 > 零基础，30 分钟，用 DeepSeek API 驱动 Claude Code，花费每天不到一毛钱。
 
@@ -76,8 +76,6 @@
 
 > ⏱ 预计耗时：**5 分钟** &nbsp;&nbsp; 📊 难度：⭐（最简单）
 
-<!-- TODO: 插入截图：platform.deepseek.com 首页 -->
-
 ### 1.1 访问注册页面
 
 打开浏览器，访问 **[platform.deepseek.com](https://platform.deepseek.com)** → 点击右上角 **Sign Up**。
@@ -101,7 +99,6 @@
 格式示例：sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-<!-- TODO: 插入截图：API Keys 页面，圈出 Create 按钮 -->
 
 ### 💰 关于费用
 
@@ -112,22 +109,18 @@
 | 最低充值 | **¥1** |
 | 价格水平 | 比 ChatGPT/GPT-4o 便宜 **几十倍** |
 
+> ⚠️ **旧模型名即将废弃！** `deepseek-chat` 和 `deepseek-reasoner` 将于 **2026年7月24日** 下线，请改用：
+> - `deepseek-chat` → `deepseek-v4-flash`
+> - `deepseek-reasoner` → `deepseek-v4-pro`（thinking 模式）
+
 **价格参考（来自 [DeepSeek 官方定价](https://api-docs.deepseek.com/quick_start/pricing)）：**
 
-| 模型 | 输入 / 百万 tokens | 输出 / 百万 tokens |
-|------|:-:|:-:|
-| `deepseek-v4-flash` 轻量 | $0.14 | $0.28 |
-| `deepseek-v4-pro` 主力 | $0.435 | $0.87 |
+| 模型 | 输入 / 百万 tokens | 输出 / 百万 tokens | 约合人民币 |
+|------|:-:|:-:|:-:|
+| `deepseek-v4-flash` 轻量 | $0.14 | $0.28 | ≈ ¥1.0 / 百万 |
+| `deepseek-v4-pro` 主力 | $0.435 | $0.87 | ≈ ¥3.2 / 百万 |
 
 > 💡 直观感受：用 `deepseek-v4-pro` 写一整天代码，花费通常**不到几毛钱**。充 ¥1 能用很久。
-
-<details>
-<summary>⚠️ 旧模型名即将废弃（点击展开）</summary>
-
-`deepseek-chat` 和 `deepseek-reasoner` 将于 **2026年7月24日** 下线，请使用新版名称：
-- `deepseek-chat` → `deepseek-v4-flash`
-- `deepseek-reasoner` → `deepseek-v4-pro`（thinking 模式）
-</details>
 
 ### ✅ 第一步检查点
 
@@ -175,6 +168,8 @@ git --version
 ```
 
 > ❌ 如果某条命令报「找不到」，说明那个软件没装好。常见原因：安装时没勾选"添加到 PATH"。最简单的办法：**卸载重装**，重装时注意看有没有 `Add to PATH` 的选项，确保勾选。
+>
+> 💡 **PowerShell 用户注意：** 如果你的默认终端是 PowerShell（Windows 11 默认），上面的 `%USERPROFILE%` 写法不生效，请改用 `$env:USERPROFILE`。建议按 `Win + R` 输入 `cmd` 回车，直接用经典命令行。
 
 ### ✅ 第二步检查点
 
@@ -214,6 +209,8 @@ added xxx packages in xx seconds
 claude --version
 # 应该显示类似 claude-code 0.x.x ✅
 ```
+
+> 💡 **不想全局安装？** 也可以用 `npx @anthropic-ai/claude-code` 直接运行，无需 `npm install -g` 步骤。
 
 ### ✅ 第三步检查点
 
@@ -346,8 +343,6 @@ claude
 - **API Endpoint** 显示 `https://api.deepseek.com/anthropic` ✅
 - **Model** 显示 `deepseek-v4-pro` ✅
 
-<!-- TODO: 插入截图：/status 输出结果，圈出关键信息 -->
-
 ### 5.4 试跑一个任务
 
 在 `▶` 后面输入：
@@ -367,6 +362,21 @@ claude
 
 ## 常见问题 FAQ
 
+### 🔍 快速排错流程
+
+遇到问题别着急，按这个顺序查：
+
+```
+出错了？
+  ├─ claude 命令找不到？ → 重开命令行，或用 npx
+  ├─ npm install 很慢？  → 换国内镜像（见下方 FAQ）
+  ├─ API 连不上？
+  │   ├─ /status 检查 URL 是不是 api.deepseek.com
+  │   ├─ API Key 填对了没有？
+  │   └─ 账户余额 > 0？
+  └─ 还不行？ → 看下面的具体 FAQ
+```
+
 <details open>
 <summary><b>Q：Node.js 装不上 / 报错？</b></summary>
 
@@ -384,6 +394,35 @@ claude
 npm config set registry https://registry.npmmirror.com
 npm install -g @anthropic-ai/claude-code
 ```
+</details>
+
+<details>
+<summary><b>Q：git 连不上 GitHub（SSL 错误 / 超时）？</b></summary>
+
+国内网络访问 GitHub 不稳定，试试以下方法：
+
+<details>
+<summary>🔧 方法一：取消 SSL 验证（临时解决）</summary>
+
+```bash
+git config --global http.sslVerify false
+```
+> ⚠️ 仅建议临时用，用完记得设回 `true`。
+</details>
+
+<details>
+<summary>🔧 方法二：配置代理（推荐）</summary>
+
+```bash
+# 如果使用 Clash/V2Ray 等代理工具（默认 7890 端口）
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+
+# 取消代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+</details>
 </details>
 
 <details>
@@ -446,6 +485,16 @@ npm uninstall -g @anthropic-ai/claude-code
 ### 配合 VS Code 使用
 
 安装 [Claude Code VS Code 扩展](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)，它会自动读取 `settings.json` 的配置，无需重复设置。
+
+### 项目级配置
+
+如果你不同项目想用不同的配置（比如不同项目用不同模型），可以在项目根目录创建 `.claude/settings.local.json`：
+
+```bash
+mkdir -p .claude
+```
+
+写入和全局 `settings.json` 同样的格式。项目级配置会**覆盖**全局配置，只影响当前项目。
 
 ### 查看当前状态
 
