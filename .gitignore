@@ -1,0 +1,15 @@
+# IDE
+.idea/
+.codex/
+
+# Other files in this directory not related to this repo
+*.pdf
+*.sh
+*.sql
+credit-report/
+personal-agent/
+claude学习.md
+claude部署云服务器.md
+mcp安装.md
+mcp-starter-pack-guide.md
+claude-code-deepseek-部署指南-*.md
