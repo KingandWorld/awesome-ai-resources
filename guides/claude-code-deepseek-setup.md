@@ -80,6 +80,8 @@
 
 打开浏览器，访问 **[platform.deepseek.com](https://platform.deepseek.com)** → 点击右上角 **Sign Up**。
 
+![DeepSeek 注册页面](../images/deepseek-signup.svg)
+
 ### 1.2 注册账号
 
 - 填邮箱（QQ、163、Gmail 都行）
@@ -92,6 +94,8 @@
 2. 点击 **Create API Key**
 3. 起个名字，比如 `claude-code`
 4. 点击创建，**立刻复制**那串 `sk-...` 开头的字符
+
+![API Keys 页面 — 点击 Create API Key](../images/deepseek-apikeys.svg)
 
 > ⚠️ **这条 Key 只显示一次！** 关闭页面后就看不到了。请马上粘贴到记事本保存。
 
@@ -342,6 +346,8 @@ claude
 确认：
 - **API Endpoint** 显示 `https://api.deepseek.com/anthropic` ✅
 - **Model** 显示 `deepseek-v4-pro` ✅
+
+![Claude Code /status 输出 — 确认连接 DeepSeek](../images/claude-status.svg)
 
 ### 5.4 试跑一个任务
 
